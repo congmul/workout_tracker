@@ -1,15 +1,15 @@
 const path = require("path");
-const router = require("express").Router();
+const htmlRouter = require("express").Router();
 
-router.get("/exercise", (req, res) => {
+htmlRouter.get("/exercise", (req, res) => {
     // res.send("exercise.html");
     res.sendFile(path.join(__dirname, "../public/exercise.html"));
 });
 
-router.get("/stats", (req, res) => {
+htmlRouter.get("/stats", (req, res) => {
     // res.send("exercise.html");
     res.sendFile(path.join(__dirname, "../public/stats.html"));
 });
 
 
-module.exports = router;
+module.exports = htmlRouter;
