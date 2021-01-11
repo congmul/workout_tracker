@@ -3,29 +3,36 @@ const mongoose = require("mongoose");
 const apiRouter = require("express").Router();
 const db = require("../models");
 
-apiRouter.get("/api/workouts", (req, res) => {
-    res.json({name: "name"}); // Should modify!!
+apiRouter.post("/api/workouts", (req, res) => {
+    console.log("For initExercise function& createWorkout Router")
 });
+
 apiRouter.put("/api/workouts/:id", (req, res) => {
     console.log(req.body);
     console.log(req.params.id);
-    if(req.body.type === "cardio"){
-        console.log("cardio");
-        db.Cardio.create(req.body).then(result =>{
-            res.json(result);
-        }).catch(err => {
-            console.log(err);
-            res.json(err);
-        });
-    }else{
-        console.log("Resistance");
-        db.Resistance.create(req.body).then(result =>{
-            res.json(result);
-        }).catch(err => {
-            console.log(err);
-            res.json(err);
-        });
-    }
+    db.Workout.create({exercise: req.body}).then(result =>{
+        res.json(result);
+    }).catch(err => {
+        console.log(err);
+        res.json(err);
+    });
+    // if(req.body.type === "cardio"){
+    //     console.log("cardio");
+        // db.Cardio.create(req.body).then(result =>{
+        //     res.json(result);
+        // }).catch(err => {
+        //     console.log(err);
+        //     res.json(err);
+        // });
+    // }else{
+    //     console.log("Resistance");
+    //     db.Resistance.create(req.body).then(result =>{
+    //         res.json(result);
+    //     }).catch(err => {
+    //         console.log(err);
+    //         res.json(err);
+    //     });
+    // }
 
 });
 
