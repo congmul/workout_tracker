@@ -14,11 +14,11 @@ apiRouter.get("/api/workouts", (req, res) => {
 
     db.Workout.aggregate([
         // {
-        //     $match: {_id: req.params.id} 
+        //     $unwind: "$exercises" 
         // },
         {
             $set: {
-                totalDuration: "1"
+                totalDuration: {$sum: "$exercises.duration"}
             }
         }
     ]).then(result => {
@@ -30,12 +30,27 @@ apiRouter.get("/api/workouts", (req, res) => {
 
 apiRouter.get("/api/workouts/range", (req, res) => {
     console.log("Dash Board to get all information");
-    db.Workout.find().sort({ day: -1 }).limit(7).then(dbExercise => {
-        res.json(dbExercise);
-    }).catch(err => {
-        console.log(err);
-        res.json(err);
-    })
+    // db.Workout.find().sort({ day: -1 }).limit(7).then(dbExercise => {
+    //     res.json(dbExercise);
+    // }).catch(err => {
+    //     console.log(err);
+    //     res.json(err);
+    // })
+    db.Workout.aggregate([
+        // {
+        //     $unwind: "$exercises" 
+        // },
+        {
+            $set: {
+                totalDuration: {$sum: "$exercises.duration"}
+            }
+        }
+    ]).sort({day: -1}).limit(7).then(result => {
+        console.log("Result of Aggregate");
+        console.log(result);
+        res.json(result);
+    });
+
 });
 
 
