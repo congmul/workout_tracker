@@ -21,7 +21,7 @@ async function initExercise() {
   let workout;
   console.log("workout in Exercise")
   console.log(workout)
-  console.log(location.search.split("=")[1]); // mongoDB _id
+  console.log(location.search.split("=")[1]); // mongoDB _id (Current Exercise)
 
   if (location.search.split("=")[1] === undefined) {
     workout = await API.createWorkout()
