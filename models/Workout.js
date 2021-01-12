@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { db } = require("./Resistance");
 
 const Schema = mongoose.Schema;
 
