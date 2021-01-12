@@ -13,36 +13,40 @@ apiRouter.get("/api/workouts", (req, res) => {
     })
 });
 
+apiRouter.get("/api/workouts/range", (req, res) => {
+ console.log();
+ console.log("in side /api/workouts/range ROUTER");
+ console.log();
+});
+
+
 apiRouter.post("/api/workouts", (req, res) => {
     console.log("For initExercise function& createWorkout Router");
 });
 
 apiRouter.put("/api/workouts/:id", (req, res) => {
     console.log(req.body);
-    console.log(req.params.id);
-    db.Workout.create({exercises: req.body}).then(result =>{
-        res.json(result);
-    }).catch(err => {
-        console.log(err);
-        res.json(err);
-    });
-    // if(req.body.type === "cardio"){
-    //     console.log("cardio");
-        // db.Cardio.create(req.body).then(result =>{
-        //     res.json(result);
-        // }).catch(err => {
-        //     console.log(err);
-        //     res.json(err);
-        // });
-    // }else{
-    //     console.log("Resistance");
-    //     db.Resistance.create(req.body).then(result =>{
-    //         res.json(result);
-    //     }).catch(err => {
-    //         console.log(err);
-    //         res.json(err);
-    //     });
-    // }
+    
+    if(req.params.id === "undefined"){
+        db.Workout.create({exercises: req.body}).then(result =>{
+            res.json(result);
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    }else{
+        console.log("There is ID");
+        console.log(req.params.id);
+        db.Workout.findOneAndUpdate({_id: req.params.id}, {$push: {exercises: req.body}}, (err, data) => {
+            if (err) {
+                console.log(err);
+                res.send(err);
+              }else {
+                res.json(data);
+              }
+        });
+    }
+    
 
 });
 

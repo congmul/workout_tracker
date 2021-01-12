@@ -19,13 +19,19 @@ let shouldNavigateAway = false;
 
 async function initExercise() {
   let workout;
+  console.log("workout in Exercise")
+  console.log(workout)
+  console.log(location.search.split("=")[1]); // mongoDB _id
 
   if (location.search.split("=")[1] === undefined) {
     workout = await API.createWorkout()
+    console.log("workout in Exercise")
     console.log(workout)
   }
   if (workout) {
     location.search = "?id=" + workout._id;
+    console.log("location.search in Exercise")
+    console.log(location.search)
   }
 
 }

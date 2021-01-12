@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { db } = require("./Resistance");
 
 const Schema = mongoose.Schema;
 
@@ -8,9 +9,8 @@ const WorkoutSchema = new Schema({
       default: Date.now
     }, 
     exercises: []
-    // totalDuration: Number
   });
-  
+
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
 module.exports = Workout;
