@@ -13,10 +13,14 @@ apiRouter.get("/api/workouts", (req, res) => {
     })
 });
 
-apiRouter.get("/api/workouts/range", (req, res) => {
- console.log();
- console.log("in side /api/workouts/range ROUTER");
- console.log();
+apiRouter.get("/api/workouts/range", (req, res)=> {
+    console.log("Dash Board to get all information");
+    db.Workout.find().then(dbExercise => {
+        res.json(dbExercise);
+    }).catch(err => {
+        console.log(err);
+        res.json(err);
+    })
 });
 
 
@@ -50,8 +54,6 @@ apiRouter.put("/api/workouts/:id", (req, res) => {
 
 });
 
-apiRouter.get("/api/workouts/range", (req, res)=> {
-    console.log("Dash Board to get all information");
-});
+
 
 module.exports = apiRouter;

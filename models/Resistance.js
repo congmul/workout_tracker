@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
+// const Schema = mongoose.Schema;
 
-const ResistanceSchema = new Schema({
-    type: String,
-    name: String,
-    weight: Number,
-    sets: Number,
-    reps: Number,
-    duration: Number
-  });
+// const ResistanceSchema = new Schema({
+//     type: String,
+//     name: String,
+//     weight: Number,
+//     sets: Number,
+//     reps: Number,
+//     duration: Number
+//   });
   
-const Resistance = mongoose.model("Resistance", ResistanceSchema);
+// const Resistance = mongoose.model("Resistance", ResistanceSchema);
 
-module.exports = Resistance;
+// module.exports = Resistance;
