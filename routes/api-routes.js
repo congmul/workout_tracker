@@ -88,7 +88,7 @@ apiRouter.put("/api/workouts/:id", (req, res) => {
             //     console.log(result);
             //     res.json(result);
             // });
-            res.json(result);
+            res.json(data);
         }
     });
     // }
