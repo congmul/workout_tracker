@@ -39,7 +39,8 @@ apiRouter.get("/api/workouts/range", (req, res) => {
 apiRouter.post("/api/workouts", (req, res) => {
     console.log("For initExercise function& createWorkout Router");
     console.log(req.body);
-    db.Workout.create({ exercises: req.body }).then(result => {
+    // db.Workout.create({ exercises: req.body }).then(result => {
+    db.Workout.create({ name : "Workout Plan"}).then(result => {
         res.json(result);
     }).catch(err => {
         console.log(err);
