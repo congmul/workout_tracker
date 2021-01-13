@@ -13,7 +13,9 @@ It is able to view create and track daily workouts
 
 ## Usage
 npm i to set environment <br>
+
 Deploy: https://tranquil-earth-58169.herokuapp.com/
+
 <img src = "./img/operatingApp.gif" width="800">
 
 ## Installation 
