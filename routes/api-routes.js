@@ -27,7 +27,7 @@ apiRouter.get("/api/workouts/range", (req, res) => {
                 totalDuration: {$sum: "$exercises.duration"}
             }
         }
-    ]).sort({day: -1}).limit(7).then(result => {
+    ]).sort({day: -1}).limit(7).sort({ day: 1 }).then(result => {
         console.log("Result of Aggregate");
         console.log(result);
         res.json(result);
