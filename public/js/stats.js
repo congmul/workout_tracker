@@ -26,11 +26,12 @@ function populateChart(data) {
   let durations = data.map(({ totalDuration }) => totalDuration);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
-  console.log("durations");
+  let poundsPerExcersize = calculateTotalWeightPerExercise(data, workouts);
+  console.log("====== durations ======");
   console.log(durations);
-  console.log("pounds");
+  console.log("====== pounds ======");
   console.log(pounds);
-  console.log("workouts");
+  console.log("===== Exercises Name after Deduplicate======");
   console.log(workouts);
   const colors = generatePalette();
 
@@ -154,7 +155,7 @@ function populateChart(data) {
     options: {
       title: {
         display: true,
-        text: 'Exercises Performed',
+        text: 'Exercises Duration Performed',
       },
     },
   });
@@ -167,14 +168,14 @@ function populateChart(data) {
         {
           label: 'Exercises Performed',
           backgroundColor: colors,
-          data: pounds,
+          data: poundsPerExcersize,
         },
       ],
     },
     options: {
       title: {
         display: true,
-        text: 'Exercises Performed',
+        text: 'Exercises Pounds Performed',
       },
     },
   });
@@ -184,8 +185,8 @@ function calculateTotalWeight(data) {
   let totals = [];
 
   data.forEach((workout) => {
-    console.log("in calculate Total Weight");
-    console.log(workout);
+    // console.log("in calculate Total Weight");
+    // console.log(workout);
     const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
       if (type === 'resistance') {
         return total + weight;
@@ -200,15 +201,37 @@ function calculateTotalWeight(data) {
   return totals;
 }
 
+function calculateTotalWeightPerExercise(data, exercisesName){
+  console.log("This is for total pounds per exercise");
+  console.log(data);
+  console.log(exercisesName);
+  
+  let totals = [0, 0, 0, 0, 0, 0, 0];
+
+  data.forEach((workout) => {
+    workout.exercises.reduce((total, {name, weight}) => {
+      console.log(weight);
+      console.log(name);
+      console.log(exercisesName.indexOf(name));
+      totals[exercisesName.indexOf(name)] += Number(weight);
+    }, 0);
+  })
+  console.log("totals");
+  console.log(totals);
+  return totals;
+}
+
 function workoutNames(data) {
   let workouts = [];
 
   data.forEach((workout) => {
+    // console.log(workout);
     workout.exercises.forEach((exercise) => {
       workouts.push(exercise.name);
     });
   });
-
+  console.log("======= Exercises Name before deduplicate =======");
+  console.log(workouts);
   // return de-duplicated array with JavaScript `Set` object
   return [...new Set(workouts)];
 }
