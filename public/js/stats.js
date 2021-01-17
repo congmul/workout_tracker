@@ -26,6 +26,7 @@ function populateChart(data) {
   let durations = data.map(({ totalDuration }) => totalDuration);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
+  let durationPerExcersize = calculateTotalDurationPerExercise(data, workouts);
   let poundsPerExcersize = calculateTotalWeightPerExercise(data, workouts);
   console.log("====== durations ======");
   console.log(durations);
@@ -148,7 +149,7 @@ function populateChart(data) {
         {
           label: 'Exercises Performed',
           backgroundColor: colors,
-          data: durations,
+          data: durationPerExcersize,
         },
       ],
     },
@@ -202,23 +203,44 @@ function calculateTotalWeight(data) {
 }
 
 function calculateTotalWeightPerExercise(data, exercisesName){
-  console.log("This is for total pounds per exercise");
-  console.log(data);
-  console.log(exercisesName);
+  // console.log("This is for total pounds per exercise");
+  // console.log(data);
+  // console.log(exercisesName);
   
   let totals = [0, 0, 0, 0, 0, 0, 0];
 
   data.forEach((workout) => {
     workout.exercises.reduce((total, {name, weight}) => {
-      console.log(weight);
-      console.log(name);
-      console.log(exercisesName.indexOf(name));
+      // console.log(weight);
+      // console.log(name);
+      // console.log(exercisesName.indexOf(name));
       totals[exercisesName.indexOf(name)] += Number(weight);
     }, 0);
   })
   console.log("totals");
   console.log(totals);
   return totals;
+}
+
+function calculateTotalDurationPerExercise(data, exercisesName){
+  console.log("This is for total duration per exercise");
+  console.log(data);
+  console.log(exercisesName);
+
+  let totals = [0, 0, 0, 0, 0, 0, 0];
+
+  data.forEach((workout) => {
+    workout.exercises.reduce((total, {name, duration}) => {
+      console.log(duration);
+      console.log(name);
+      console.log(exercisesName.indexOf(name));
+      totals[exercisesName.indexOf(name)] += Number(duration);
+    }, 0);
+  })
+  console.log("totals");
+  console.log(totals);
+  return totals;
+
 }
 
 function workoutNames(data) {
